@@ -1,7 +1,13 @@
-<x-guest-layout>
+<x-welcome-layout>
+    <x-slot:header>
+        Forgotten Password
+    </x-slot:header>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
+        ddd
+        ddddddddd
+        ddd
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
@@ -36,4 +42,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-welcome-layout>

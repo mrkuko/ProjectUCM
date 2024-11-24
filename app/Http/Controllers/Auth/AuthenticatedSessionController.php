@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\UserPosition;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -29,7 +32,35 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Retrieve the authenticated user
+        $user = $request->user();
+//        foreach ($user->branches as $branch) {
+//            dump($branch->name . ' (' . $branch->pivot->position . ')<br>');
+//        }
+//        dump($user->getRoleInBranch($user->branches()->first()));
+
+        // TODO loop error 404 redirect /login
+//        if (Redirect::intended(RouteServiceProvider::HOME)) {}
+//        $intendedRoute = session()->get('url.intended');
+//        if ($intendedRoute && Route::has($intendedRoute)) {
+//         Determine redirection based on user role
+        switch ($user->getRoleInBranch($user->branches()->first())) {
+            case UserPosition::Admin->value:
+                Log::warning("Admin");
+                return redirect()->intended(route('admin.dashboard'));
+            case UserPosition::Manager->value:
+                Log::warning("Manager");
+                return redirect()->intended(route('manager.dashboard'));
+            case UserPosition::Seller->value:
+                Log::warning("Seller");
+                return redirect()->intended(route('seller.dashboard'));
+            default:
+                // Redirect to a default route if no role matches
+//                return redirect()->intended(route('login'));
+                abort(403);
+        }
+
+//        return redirect()->intended(route('manager.dashboard', absolute: false));
     }
 
     /**

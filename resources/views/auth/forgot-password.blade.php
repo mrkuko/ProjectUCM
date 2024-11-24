@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-welcome-layout :header="'Forgot Password'">
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -16,10 +16,13 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-4">
+            <x-secondary-button onclick="window.location='{{ route('login') }}'">
+                {{ __('Cancel') }}
+            </x-secondary-button>
             <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+                {{ __('Reset Password') }}
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-welcome-layout>
