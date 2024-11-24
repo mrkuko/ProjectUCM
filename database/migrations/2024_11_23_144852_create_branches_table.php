@@ -23,6 +23,7 @@ return new class extends Migration
             // Create a constrain and then if referenced item is deleted, delete this as well
             $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(\App\Models\Branch::class)->constrained()->cascadeOnDelete();
+            $table->string('position');
             $table->timestamps();
         });
     }

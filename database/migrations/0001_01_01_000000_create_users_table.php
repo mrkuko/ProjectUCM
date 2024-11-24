@@ -16,7 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default(0);
+            $table->string('phone');
+            // Moved into pivot table inside branch migration
+//            $table->enum('position', ['admin', 'manager', 'seller'])->default('seller');
+            $table->decimal('salary', 10, 2);
+//            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

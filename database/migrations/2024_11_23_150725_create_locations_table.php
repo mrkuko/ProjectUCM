@@ -26,6 +26,14 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Location::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
+
+        Schema::create('customer_location', function (Blueprint $table) {
+            $table->id();
+            // Create a constrain and then if referenced item is deleted, delete this as well
+            $table->foreignIdFor(\App\Models\Customer::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Location::class)->constrained()->cascadeOnDelete();
+            $table->timestamps();
+        });
     }
 
     /**
