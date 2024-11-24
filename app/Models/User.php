@@ -21,7 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'position',
+        'salary',
     ];
+
+    /**
+     * User have one(manager, seller) or many(admin) branches
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function location()
+    {
+        return $this->hasMany(Branch::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
