@@ -17,8 +17,30 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create()
     {
+        // Check if the user is authenticated
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            // Switch case based on user's role in the branch
+            switch ($user->getRoleInBranch($user->branches()->first())) {
+                case UserPosition::Admin->value:
+                    Log::warning("Admin");
+                    return redirect()->intended(route('admin.dashboard')); // Redirect to admin dashboard
+                case UserPosition::Manager->value:
+                    Log::warning("Manager");
+                    return redirect()->intended(route('manager.dashboard')); // Redirect to manager dashboard
+                case UserPosition::Seller->value:
+                    Log::warning("Seller");
+                    return redirect()->intended(route('seller.dashboard')); // Redirect to seller dashboard
+                default:
+                    // Abort if no matching role found
+                    abort(403, 'Forbidden');
+            }
+        }
+
+        // If the user is not authenticated, show the login form
         return view('auth.login');
     }
 
@@ -47,13 +69,13 @@ class AuthenticatedSessionController extends Controller
         switch ($user->getRoleInBranch($user->branches()->first())) {
             case UserPosition::Admin->value:
                 Log::warning("Admin");
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard');
             case UserPosition::Manager->value:
                 Log::warning("Manager");
-                return redirect()->intended(route('manager.dashboard'));
+                return redirect()->route('manager.dashboard');
             case UserPosition::Seller->value:
                 Log::warning("Seller");
-                return redirect()->intended(route('seller.dashboard'));
+                return redirect()->route('seller.dashboard');
             default:
                 // Redirect to a default route if no role matches
 //                return redirect()->intended(route('login'));

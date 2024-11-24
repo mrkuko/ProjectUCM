@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        $branch = $user->branches()->first();
+        return redirect(route($user->getRoleInBranch($branch) . 'dashboard', absolute: false));
     }
 }
