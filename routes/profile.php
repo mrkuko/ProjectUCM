@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 // ---------- Admin ----------
 Route::middleware(['auth', 'verified', 'hasRole:admin'])->group(function () {
+    Route::get('/admin/', function (){
+        return redirect()->route('admin.dashboard');
+    });
     Route::get('/admin/dashboard', function (){
         return view('profile.admin.dashboard');
     })->name('admin.dashboard');
@@ -28,10 +31,19 @@ Route::middleware(['auth', 'verified', 'hasRole:admin'])->group(function () {
     Route::get('/admin/warehouses', function (){
         return view('profile.admin.warehouses');
     })->name('admin.warehouses');
+
+    Route::get('/admin/employee-add', function (){
+        return view('profile.admin.employee-add');
+    })->name('admin.employee-add');
+
+    Route::post('/admin/employee-add', [ProfileController::class, 'store'])->name('admin.employee-add');
 });
 
 // ---------- Manager ----------
 Route::middleware(['auth', 'verified', 'hasRole:manager'])->group(function () {
+    Route::get('/manager/', function (){
+        return redirect()->route('manager.dashboard');
+    });
     Route::get('/manager/dashboard', function (){
         return view('profile.manager.dashboard');
     })->name('manager.dashboard');
@@ -55,6 +67,9 @@ Route::middleware(['auth', 'verified', 'hasRole:manager'])->group(function () {
 
 // ---------- Seller ----------
 Route::middleware(['auth', 'verified', 'hasRole:seller'])->group(function () {
+    Route::get('/seller/', function (){
+        return redirect()->route('seller.dashboard');
+    });
     Route::get('/seller/dashboard', function (){
         return view('profile.seller.dashboard');
     })->name('seller.dashboard');

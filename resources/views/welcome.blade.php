@@ -12,7 +12,7 @@
                     About
                 </a>
             </div>
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <div class="sm:mt-2 sm:col-span-3 sm:max-w-80 lg:mt-0 lg:col-span-5 lg:flex">
                 <img src="https://img.freepik.com/free-vector/3d-isometric-storage-post-service-set-cardboard-packaging-mail-with-adhesive-tapes_1441-1996.jpg?semt=ais_hybrid" alt="mockup">
             </div>
         </div>

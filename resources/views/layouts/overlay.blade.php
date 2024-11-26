@@ -92,15 +92,42 @@ bg-gray-100
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
-
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            <div class="h-full flex flex-row justify-center space-x-3">
+                                <div class="flex justify-center items-center">
+                                    <svg class="flex justify-center items-center" width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.71989 18.1649C8.20133 18.1631 8.66276 17.9711 9.00307 17.6306C9.34356 17.2901 9.53571 16.8288 9.5374 16.3474H5.90235C5.90404 16.8288 6.09621 17.2901 6.43668 17.6306C6.77701 17.9711 7.23842 18.1631 7.71985 18.1649H7.71989ZM14.2665 13.3565V13.3563C13.8556 12.9475 13.624 12.3921 13.6225 11.8123V7.71838C13.6225 6.48322 13.2346 5.27925 12.5136 4.2764C11.7925 3.27339 10.7746 2.52242 9.60369 2.12914C9.45291 2.08036 9.32151 1.98513 9.22797 1.85727C9.13442 1.72926 9.0838 1.57509 9.08319 1.4166C9.08826 1.05534 8.95318 0.706086 8.70654 0.442227C8.45975 0.178207 8.12049 0.0198724 7.7597 0.000651158C7.39151 -0.0107343 7.03457 0.127586 6.77024 0.384067C6.50576 0.640549 6.35667 0.993199 6.35682 1.36151V1.41659C6.35621 1.57507 6.30559 1.72923 6.21204 1.85726C6.1185 1.98512 5.9871 2.08036 5.83632 2.12913C4.66544 2.52239 3.64754 3.27338 2.92639 4.27639C2.2054 5.27924 1.81755 6.48317 1.81755 7.71837V11.8056C1.81601 12.3854 1.58445 12.9408 1.17348 13.3496L0.641902 13.8812C0.233569 14.2917 0.00307225 14.8462 0 15.4251H15.44C15.4369 14.8462 15.2064 14.2917 14.7981 13.8812L14.2665 13.3565Z" fill="#121212"/>
                                     </svg>
                                 </div>
-                            </button>
+                                <div class="flex justify-center items-center">
+                                    @can('role', 'admin')
+                                        <div class="flex justify-center items-center w-12 h-12 bg-gray-300 rounded-full p-2">
+                                            <img src="{{ asset('icon-admin.png') }}" alt="{{ Auth::user()->name }}" class="flex h-8"/>
+                                        </div>
+                                    @endcan
+                                    @can('role', 'manager')
+                                        <div class="flex justify-center items-center w-12 h-12 bg-gray-300 rounded-full p-2">
+                                            <img src="{{ asset('icon-manager.png') }}" alt="{{ Auth::user()->name }}" class="flex h-8"/>
+                                        </div>
+                                    @endcan
+                                    @can('role', 'seller')
+                                        <div class="flex justify-center items-center w-12 h-12 bg-gray-300 rounded-full p-2">
+                                            <img src="{{ asset('icon-seller.png') }}" alt="{{ Auth::user()->name }}" class="flex h-8"/>
+                                        </div>
+                                    @endcan
+                                </div>
+                                <button class="inline-flex items-center py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    <div class="flex flex-col items-start justify-center">
+                                        <h3 class="text-l font-bold text-black">{{ Auth::user()->name }}</h3>
+                                        <p>{{ Auth::user()->getRoleInBranch(Auth::user()->branches()->first()) }}</p>
+                                    </div>
+
+                                    <div class="ms-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
                         </x-slot>
 
                         <x-slot name="content">
@@ -122,69 +149,6 @@ bg-gray-100
                     </x-dropdown>
                 </div>
             </div>
-            {{--            <nav class="flex-initial h-[9%]">--}}
-            {{--                <div class="h-full px-3 lg:px-5 lg:pl-3 flex items-center justify-between">--}}
-            {{--                        <!-- Title -->--}}
-            {{--                        <div class="flex items-center justify-start rtl:justify-end">--}}
-            {{--                            <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">--}}
-            {{--                                <span class="sr-only">Open sidebar</span>--}}
-            {{--                                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">--}}
-            {{--                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>--}}
-            {{--                                </svg>--}}
-            {{--                            </button>--}}
-            {{--                            <a href="https://flowbite.com" class="flex ms-2 md:me-24">--}}
-            {{--                                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />--}}
-            {{--                                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>--}}
-            {{--                            </a>--}}
-            {{--                        </div>--}}
-
-            {{--                        <!-- User -->--}}
-            {{--                        <div class="flex items-center">--}}
-            {{--                            <div class="flex items-center ms-3">--}}
-            {{--                                <div>--}}
-            {{--                                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">--}}
-            {{--                                        <span class="sr-only">Open user menu</span>--}}
-            {{--                                        TODO--}}
-            {{--                                        <x-user-logo type="man"/>--}}
-            {{--                                        <img class="w-8 h-8 rounded-full" src="" alt="user photo">--}}
-            {{--                                    </button>--}}
-            {{--                                </div>--}}
-            {{--                                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">--}}
-            {{--                                    <div class="px-4 py-3" role="none">--}}
-            {{--                                        <p class="text-sm text-gray-900 dark:text-white" role="none">--}}
-            {{--                                            Neil Sims--}}
-            {{--                                        </p>--}}
-            {{--                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">--}}
-            {{--                                            neil.sims@flowbite.com--}}
-            {{--                                        </p>--}}
-            {{--                                    </div>--}}
-            {{--                                    <ul class="py-1" role="none">--}}
-            {{--                                        <li>--}}
-            {{--                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">--}}
-            {{--                                                Dashboard--}}
-            {{--                                            </a>--}}
-            {{--                                        </li>--}}
-            {{--                                        <li>--}}
-            {{--                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">--}}
-            {{--                                                Settings--}}
-            {{--                                            </a>--}}
-            {{--                                        </li>--}}
-            {{--                                        <li>--}}
-            {{--                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">--}}
-            {{--                                                Earnings--}}
-            {{--                                            </a>--}}
-            {{--                                        </li>--}}
-            {{--                                        <li>--}}
-            {{--                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">--}}
-            {{--                                                Sign out--}}
-            {{--                                            </a>--}}
-            {{--                                        </li>--}}
-            {{--                                    </ul>--}}
-            {{--                                </div>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                </div>--}}
-            {{--            </nav>--}}
 
             <div {{ isset($attributes) ? $attributes->merge(['class'=>'flex-1 h-full']) : 'class=flex-1' }}>
                 @if(isset($slot) && trim($slot))
