@@ -1,3 +1,7 @@
+@props([
+    'header'
+])
+
 <x-guest-layout xmlns="http://www.w3.org/1999/html">
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

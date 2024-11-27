@@ -1,4 +1,4 @@
-<x-welcome-layout>
+<x-welcome-layout :header="'Sign In'">
     <form class="space-y-8" action="{{ route('login') }}" method="POST">
         @csrf
 

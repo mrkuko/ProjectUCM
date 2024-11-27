@@ -2,6 +2,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 
 // const colors = require('tailwindcss/colors')
+const flowbite = require('flowbite/plugin');
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -26,7 +27,13 @@ export default {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), forms],
+    plugins: [
+        require('@tailwindcss/forms'),
+        forms,
+        require('flowbite/plugin')({
+            charts: true,
+        }),
+    ],
     darkMode: 'false',
     // media, false
 };

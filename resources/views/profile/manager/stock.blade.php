@@ -8,6 +8,7 @@
 
     <div class="p-4 min-h-full">
         <div class="grid grid-cols-4 gap-4">
+
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <p class="text-center text-gray-500 text-sm">Item name</p>
                 <img src="your_image_url" alt="Item Image" class="mx-auto">
