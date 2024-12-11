@@ -13,6 +13,13 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = ['image_url', 'name', 'price'];
 
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branch_products')
+            ->withPivot('amount')
+            ->withTimestamps();
+    }
+
     //TODO
     public function productListings()
     {

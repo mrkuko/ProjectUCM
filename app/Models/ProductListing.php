@@ -10,7 +10,7 @@ class ProductListing extends Model
     /** @use HasFactory<\Database\Factories\ProductListingFactory> */
     use HasFactory;
 
-    protected $table = 'product_listing';
+    protected $table = 'product_listings';
     protected $fillable = ['amount'];
 
     public function products()
@@ -23,7 +23,7 @@ class ProductListing extends Model
         return $this->belongsToMany(Transaction::class);
     }
 
-    public function braches()
+    public function branches()
     {
         return $this->belongsToMany(Branch::class);
     }

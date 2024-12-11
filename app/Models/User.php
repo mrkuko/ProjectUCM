@@ -49,6 +49,15 @@ class User extends Authenticatable
     }
 
     /**
+     * The branch the user is associated with. (providing one user have just one branch)
+     * @return Branch|null
+     */
+    public function getBranch(): Branch|null
+    {
+        return $this->branches()->first();
+    }
+
+    /**
      * Get the user's role (position) in a specific branch.
      * @param Branch $branch
      * @return string|null

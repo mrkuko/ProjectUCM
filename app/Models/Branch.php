@@ -13,23 +13,33 @@ class Branch extends Model
     protected $table = 'branches';
     protected $fillable = ['budget'];
 
-    public function managers()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'user_branch')
-            ->where('position', 'manager');
-//        return $this->hasMany(User::class)->where('position', 'manager');
+            ->withPivot('position');
     }
 
-    public function sellers()
-    {
-        return $this->belongsToMany(User::class)
-            ->where('position', 'seller');
-    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function products()
     {
-        return $this->hasMany(ProductListing::class, 'branch_id');
+        return $this->belongsToMany(Product::class, 'branch_products')
+            ->withPivot('amount', 'created_at', 'updated_at');
     }
+
+    /*
+        $branch = Branch::find(1);
+        foreach ($branch->products as $product) {
+            echo "Product: {$product->name}, Amount: {$product->pivot->amount}\n";
+        }
+
+        // Attach a product with an amount
+        $branch->products()->attach($product->id, ['amount' => 100]);
+
+        // Update the amount for an existing product
+        $branch->products()->updateExistingPivot($product->id, ['amount' => 200]);
+     */
 
     public function transactions()
     {

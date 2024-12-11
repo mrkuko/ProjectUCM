@@ -27,6 +27,14 @@ class ProductData
         'Post-it Notes' => 'https://img.freepik.com/free-vector/multicolor-sticky-notes-collection_1232-4623.jpg?semt=ais_hybrid',
         'Paper Cups' => 'https://img.freepik.com/free-vector/small-white-paper-cup-isolated-white_1284-45621.jpg?semt=ais_hybrid',
     ];
+
+    public const CATEGORIES = [
+        'Stationery',
+        'Electronics',
+        'Furniture',
+        'Cleaning Supplies',
+        'Packaging Materials',
+    ];
 }
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -51,6 +59,8 @@ class ProductFactory extends Factory
         return [
             'name' => $companyName,
             'image_url' => $imageUrl,
+            'category' => $this->faker->randomElement(ProductData::CATEGORIES),
+            'description' => $this->faker->text,
             'price' => $this->faker->randomFloat(2, 5, 30),
         ];
     }

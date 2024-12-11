@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +14,12 @@ return new class extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Product::class)->constrained('products')->cascadeOnDelete();
             $table->integer('amount');
             $table->timestamps();
         });
 
-        Schema::create('branch_product_listing', function (Blueprint $table) {
+        Schema::create('branch_product_listings', function (Blueprint $table) {
             $table->id();
             // Correctly reference the branch and product_listings tables
             $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete();
@@ -25,12 +27,21 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('transaction_product_listing', function (Blueprint $table) {
+        Schema::create('transaction_product_listings', function (Blueprint $table) {
             $table->id();
             // Correctly reference the product_listings and transactions tables
             $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('product_listings')->cascadeOnDelete();
             $table->decimal('price', 10, 2);
+            $table->timestamps();
+        });
+
+        Schema::create('branch_products', function (Blueprint $table) {
+            $table->id();
+            // Correctly reference the branch and product_listings tables
+            $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -41,8 +52,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('transaction_product_listing');
-        Schema::dropIfExists('branch_product_listing');
+        Schema::dropIfExists('branch_product_listings');
         Schema::dropIfExists('product_listings');
+        Schema::dropIfExists('branch_products');
+
     }
 };
 
