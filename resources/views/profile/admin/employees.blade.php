@@ -33,8 +33,8 @@
                         <option value="admin">seller</option>
                     </select>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať zamestnanca</button>
-            </div>
+                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        href="{{ route('admin.employee-add') }}">Pridať zamestnanca</a>            </div>
 
             <table class="w-full border-collapse">
                 <thead>

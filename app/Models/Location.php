@@ -7,9 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    protected $fillable = ['location_type', 'location_id'];
+    protected $fillable = [
+        'street_address',
+        'city',
+        'state',
+        'postal_code',
+        'addressable_id',
+        'addressable_type'
+    ];
 
-    public function locatable()
+    // Polymorphic inverse relationship
+    public function addressable()
     {
         return $this->morphTo();
     }

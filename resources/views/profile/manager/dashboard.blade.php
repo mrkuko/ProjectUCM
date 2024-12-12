@@ -91,22 +91,31 @@
                 <table class="w-full border-collapse">
                     <thead>
                     <tr>
-                        <th class="border border-gray-300 p-2">N</th>
-                        <th class="border border-gray-300 p-2">Meno odberateľa</th>
-                        <th class="border border-gray-300 p-2">ID odberateľa</th>
-                        <th class="border border-gray-300 p-2">Odoslané zásielky</th>
-                        <th class="border border-gray-300 p-2">Očakávané zásielky</th>
-                        <th class="border border-gray-300 p-2">Stav</th>
+                        <th class="p-2 text-left">N</th>
+                        <th class="p-2 text-left">Meno odberateľa</th>
+                        <!-- Fotka -->
+                        <th class="p-2"></th>
+                        <th class="p-2 text-left">ID odberateľa</th>
+                        <th class="p-2 text-left">Odoslané zásielky</th>
+                        <th class="p-2 text-left">Očakávané zásielky</th>
+                        <th class="p-2 text-left">Stav</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @php
+                        $transactions = \Illuminate\Support\Facades\Auth::user()->getBranch()->transactions();
+
+                    @endphp
                     <tr>
-                        <td class="border border-gray-300 p-2">01</td>
-                        <td class="border border-gray-300 p-2">Meno</td>
-                        <td class="border border-gray-300 p-2">45656787</td>
-                        <td class="border border-gray-300 p-2">50pcs</td>
-                        <td class="border border-gray-300 p-2">40pcs</td>
-                        <td class="border border-gray-300 p-2 bg-green-100 text-green-700">Aktívny</td>
+                        <td class="border-b border-gray-300 p-2">01</td>
+                        <td class="border-b border-gray-300 p-2">Meno</td>
+                        <td class="border-b border-gray-300 p-2">
+                            <img src="">
+                        </td>
+                        <td class="border-b border-gray-300 p-2">45656787</td>
+                        <td class="border-b border-gray-300 p-2">50pcs</td>
+                        <td class="border-b border-gray-300 p-2">40pcs</td>
+                        <td class="border-b border-gray-300 p-2 bg-green-100 text-green-700">Aktívny</td>
                     </tr>
                     </tbody>
                 </table>

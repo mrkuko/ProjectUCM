@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <p class="text-gray-500 text-sm">Celkový počet zamestnancov</p>
-                    <h2 class="text-2xl font-bold">180</h2>
+                    <h2 class="text-2xl font-bold">1</h2>
                 </div>
                 <div>
                     <p class="text-gray-500 text-sm">Filtrovanie</p>

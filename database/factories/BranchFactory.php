@@ -27,6 +27,7 @@ class BranchFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(BRANCHES),
+            'city' => $this->faker->city,
             'budget' => $this->faker->randomFloat(2, 1000, 15000),
         ];
     }

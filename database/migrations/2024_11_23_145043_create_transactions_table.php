@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Location::class, 'from_location_id');
             $table->foreignIdFor(\App\Models\Location::class, 'to_location_id');
             $table->foreignIdFor(\App\Models\User::class, 'by_user_id');
+            $table->decimal('price', 8, 2)->default(0);
             $table->timestamps();
         });
 

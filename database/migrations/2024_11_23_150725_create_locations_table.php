@@ -14,8 +14,16 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Customer::class)->nullable()->constrained();
-            $table->foreignIdFor(\App\Models\Branch::class)->nullable()->constrained();
+//            $table->foreignIdFor(Customer::class)->nullable()->constrained();
+//            $table->foreignIdFor(\App\Models\Branch::class)->nullable()->constrained();
+            $table->string('street_address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postal_code');
+
+            $table->unsignedBigInteger('addressable_id');
+            $table->string('addressable_type');
+
             $table->timestamps();
         });
 
@@ -43,5 +51,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('locations');
         Schema::dropIfExists('branch_location');
+        Schema::dropIfExists('customer_location');
     }
 };

@@ -41,9 +41,14 @@ class Branch extends Model
         $branch->products()->updateExistingPivot($product->id, ['amount' => 200]);
      */
 
+//    public function transactions()
+//    {
+//        return $this->hasMany(Transaction::class, 'branch_id');
+//    }
     public function transactions()
     {
-        return $this->hasMany(Transaction::class, 'branch_id');
+        return $this->belongsToMany(Transaction::class, 'branch_transaction')
+            ->withTimestamps();
     }
 
     public function customers()
@@ -51,8 +56,8 @@ class Branch extends Model
         return $this->hasMany(Customer::class, 'branch_id');
     }
 
-    public function locations()
+    public function addresses()
     {
-        return $this->morphMany(Location::class, 'locatable');
+        return $this->morphMany(Location::class, 'addressable');
     }
 }

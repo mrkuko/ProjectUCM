@@ -6,26 +6,29 @@
         </div>
     </x-slot:headerSlot>
 
-    <div class="p-4 min-h-full">
-        <div class="bg-white p-4 rounded-lg shadow-md">
-            <div class="flex justify-between items-center mb-4">
-                <form method="GET">
-                    <div class="relative text-gray-600 focus-within:text-gray-400">
-                        <input type="search" name="q" class="py-2 text-sm rounded-md" placeholder="Search..." autocomplete="off">
-                        <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+    <div class="min-h-full">
+        <div class="p-4">
+            <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+                <div class="flex justify-between items-center">
+                    <form method="GET">
+                        <div class="relative text-gray-600 focus-within:text-gray-400">
+                            <input type="search" name="q" class="py-2 text-sm rounded-md" placeholder="Search..." autocomplete="off">
+                            <span class="absolute inset-y-0 right-0 flex items-center pl-2">
                         <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
                           <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         </button>
                       </span>
-                    </div>
-                </form>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať nový produkt</button>
+                        </div>
+                    </form>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pridať nový produkt</button>
+                </div>
             </div>
 
-            <table class="w-full">
+            <table class="w-full bg-white p-4 rounded-lg shadow-md">
                 <thead>
                 <tr>
                     <th class="p-2 text-left">ID</th>
+                    <th class="p-2"></th>
                     <th class="p-2 text-left">Názov</th>
                     <th class="p-2 text-left">Popis</th>
                     <th class="p-2 text-left">Cena</th>
@@ -48,6 +51,9 @@
                 @foreach($products as $product)
                     <tr>
                         <td class="border-b border-gray-300 p-2">{{ $product->id }}</td>
+                        <td class="border-b border-gray-300 p-2">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-10 w-10">
+                        </td>
                         <td class="border-b border-gray-300 p-2">{{ $product->name }}</td>
                         <td class="border-b border-gray-300 p-2">{{ $product->description }}</td>
                         <td class="border-b border-gray-300 p-2">{{ $product->price }}</td>

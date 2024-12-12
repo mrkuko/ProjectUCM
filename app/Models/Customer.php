@@ -14,8 +14,8 @@ class Customer extends Model
 
     protected $fillable = ['image_url', 'name'];
 
-    public function locations()
+    public function addresses()
     {
-        return $this->morphMany(Location::class, 'locatable');
+        return $this->morphMany(Location::class, 'addressable');
     }
 }
